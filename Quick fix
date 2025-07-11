@@ -1,0 +1,13 @@
+# 1. Clone your GitHub repo
+!git clone https://github.com/DeanMarsh68/collaboration_v8.git
+
+# 2. Change into that directory
+%cd collaboration_v8
+
+# 3. Verify setup.py is there
+!ls
+# you should see setup.py, collaboration/, dashboard/, etc.
+
+# 4. Install requirements and your package
+!pip install -q -r requirements.txt
+!pip install -q -e .
