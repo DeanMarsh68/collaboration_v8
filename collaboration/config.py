@@ -1,41 +1,36 @@
-import os
+# ⚙️ General Settings
+TOP_N_MARKETS_PER_MATCH = 3           # Number of high-EV bets to return per match
+MIN_EV_THRESHOLD        = 0.05        # Minimum expected value for a market to be selected
+MAX_ODDS_CAP            = 20.0        # Upper limit on decimal odds for filtering
 
-MODEL_NAME              = "collaboration_v8"
-START_BANKROLL          = float(os.getenv("START_BANKROLL", "100.0"))
+# 📅 League and Match Filters
+SUPPORTED_LEAGUES = [
+    "Premier League", "Serie A", "La Liga", "Bundesliga", "Ligue 1",
+    "Eredivisie", "Primeira Liga", "Scottish Premiership",
+    "Super Lig", "Belgian Pro League"
+]
 
-EV_THRESHOLDS = {
-    "BTTS_No":    0.08,
-    "Totals_1.5": 0.05,
-    "Totals_2.5": 0.05,
-    "Totals_3.5": 0.05,
-    "1X2":        0.05
+WOMENS_COMPETITIONS = [
+    "UEFA Championship - Women",
+    "FA Women's Super League",
+    "Division 1 Féminine",
+    "Frauen-Bundesliga"
+]
+
+# 🤖 Model Configuration
+RANDOM_FOREST_PARAMS = {
+    "n_estimators": 100,
+    "max_depth": 8,
+    "min_samples_split": 5,
+    "random_state": 42
 }
 
-MAX_PAIR_CORR = 0.70
-CORR_MATRIX   = {}
+# 📊 Feature Flags
+INCLUDE_HOME_ADVANTAGE      = True
+INCLUDE_RECENT_FORM         = True
+INCLUDE_INJURY_DATA         = False  # toggle when injury feed is active
+INCLUDE_WEATHER_FEATURES    = False  # toggle when weather API is wired
 
-API_KEYS = {
-    "api_football":  os.getenv("API_FOOTBALL_KEY", ""),
-    "weather":       os.getenv("WEATHER_API_KEY", ""),
-    "football_data": os.getenv("FOOTBALL_DATA_KEY", ""),
-    "exchange":      os.getenv("EXCHANGE_API_KEY", "")
-}
-
-WEATHER_API_URL  = "https://api.weather.com/v3/wx/conditions/current"
-INJURY_API_URL   = "https://api.football-data.org/v2/teams/{team_id}/injuries"
-EXCHANGE_API_URL = "https://api.betfair.com/exchange/volume"
-
-SHARPE_ALERT_THRESH = 1.0
-DRIFT_ALERT_WINDOW  = 50
-DRIFT_ALERT_BRIER   = 0.05
-BRIER_BASELINE      = 0.16
-
-ALERT_RECIPIENTS = os.getenv("ALERT_RECIPIENTS", "you@example.com").split(",")
-SMS_GATEWAY_API  = os.getenv("SMS_GATEWAY_API", "")
-
-STADIUM_GEOCODE = {
-    "England":     "51.555,0.108",
-    "Netherlands": "52.314,4.941",
-    "France":      "48.853,2.369",
-    "Wales":       "51.481,-3.179"
-}
+# 📍 External API Settings
+DEFAULT_EXCHANGE_CURRENCY = "EUR"
+DEFAULT_MARKET_REGION     = "EU"
